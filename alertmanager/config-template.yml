@@ -10,5 +10,3 @@ receivers:
             smarthost: ${ALERTMANAGER_SMTP_HOST}
             auth_username: ${ALERTMANAGER_SMTP_USERNAME}
             auth_password: ${ALERTMANAGER_SMTP_PASSWORD}
-      webhook_configs:
-           - url: http://am2pushbullet:5001/alert
