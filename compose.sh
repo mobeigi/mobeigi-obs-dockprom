@@ -12,4 +12,4 @@ if [[ -z "${ALERTMANAGER_SMTP_PASSWORD}" ]]; then echo "ALERTMANAGER_SMTP_PASSWO
 envsubst < ./alertmanager/config-template.yml > ./alertmanager/config.yml
 
 # Docker compose
-docker-compose up -d --force-recreate
+docker compose up -d --force-recreate
