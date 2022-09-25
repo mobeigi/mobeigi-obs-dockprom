@@ -33,4 +33,17 @@ services:
     labels:
       org.label-schema.group: "monitoring"
   
-
+  am2pushbullet:
+    image: golang
+    container_name: am2pushbullet
+    command: >
+        sh -c "git clone https://github.com/buxtronix/am2pushbullet &&
+               cd ./am2pushbullet &&
+               go get github.com/prometheus/alertmanager/template &&
+               go get github.com/xconstruct/go-pushbullet &&
+               go build am2pushbullet.go &&
+               ./am2pushbullet -api_key ${PUSHBULLET_API_KEY}"
+    restart: unless-stopped
+    network_mode: host
+    labels:
+      org.label-schema.group: "monitoring"

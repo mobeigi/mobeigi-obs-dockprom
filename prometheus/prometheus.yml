@@ -25,29 +25,31 @@ scrape_configs:
 
   - job_name: 'prometheus'
     scrape_interval: 10s
+    metrics_path: /prometheus/metrics
     static_configs:
       - targets: ['localhost:9090']
 
   - job_name: 'pushgateway'
     scrape_interval: 10s
+    metrics_path: /pushgateway/metrics
     honor_labels: true
     static_configs:
       - targets: ['pushgateway:9091']
 
+  - job_name: 'atom-nodeexporter'
+    scrape_interval: 30s
+    scheme: https
+    basic_auth:
+        username: 'admin'
+        password_file: /etc/prometheus/.secrets/atom.mobeigi.com.htpasswd
+    metrics_path: /node_exporter/metrics
+    static_configs:
+      - targets: ['mobeigi.com']
 
 alerting:
   alertmanagers:
   - scheme: http
+    path_prefix: /alertmanager
     static_configs:
     - targets: 
       - 'alertmanager:9093'
-
-#  - job_name: 'nginx'
-#    scrape_interval: 10s
-#    static_configs:
-#      - targets: ['nginxexporter:9113']
-
-#  - job_name: 'aspnetcore'
-#    scrape_interval: 10s
-#    static_configs:
-#      - targets: ['eventlog-proxy:5000', 'eventlog:5000']

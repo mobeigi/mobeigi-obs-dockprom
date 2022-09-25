@@ -2,3 +2,7 @@
 .vs/
 .vscode/
 .idea/
+
+# secrets
+alertmanager/config.yml
+prometheus/.secrets

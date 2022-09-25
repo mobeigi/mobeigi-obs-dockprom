@@ -23,6 +23,7 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
+      - '--web.external-url=http://localhost:9090/prometheus/'
     restart: unless-stopped
     expose:
       - 9090
@@ -39,6 +40,7 @@ services:
     command:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
+      - '--web.external-url=http://localhost:9093/alertmanager/'
     restart: unless-stopped
     expose:
       - 9093
@@ -94,6 +96,8 @@ services:
       - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
       - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s:%(http_port)s/grafana/
+      - GF_SERVER_SERVE_FROM_SUB_PATH=true
     restart: unless-stopped
     expose:
       - 3000
@@ -105,6 +109,8 @@ services:
   pushgateway:
     image: prom/pushgateway:v1.2.0
     container_name: pushgateway
+    command:
+      - '--web.external-url=http://localhost:9091/pushgateway/'
     restart: unless-stopped
     expose:
       - 9091

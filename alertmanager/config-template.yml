@@ -1,0 +1,14 @@
+route:
+    receiver: 'all_receiver'
+
+receivers:
+    - name: 'all_receiver'
+      email_configs:
+          - send_resolved: true
+            to: alerts@mobeigi.com
+            from: Observability <obs@mobeigi.com>
+            smarthost: ${ALERTMANAGER_SMTP_HOST}
+            auth_username: ${ALERTMANAGER_SMTP_USERNAME}
+            auth_password: ${ALERTMANAGER_SMTP_PASSWORD}
+      webhook_configs:
+           - url: http://am2pushbullet:5001/alert
