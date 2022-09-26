@@ -7,7 +7,7 @@ groups:
     labels:
       severity: critical
     annotations:
-      summary: "{{ $labels.job }}: Monitor service is down"
+      summary: "{{ $labels.instance }}: Monitor service is down"
       description: "Monitor service {{ $labels.instance }} is down."
 
 - name: host
