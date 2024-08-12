@@ -44,7 +44,7 @@ scrape_configs:
         password_file: /etc/prometheus/.secrets/atom.mobeigi.com.htpasswd
     metrics_path: /node_exporter/metrics
     static_configs:
-      - targets: ['mobeigi.com']
+      - targets: ['nodeexporter.mobeigi.com']
 
 alerting:
   alertmanagers:
