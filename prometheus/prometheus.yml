@@ -42,7 +42,7 @@ scrape_configs:
     basic_auth:
         username: 'admin'
         password_file: /etc/prometheus/.secrets/atom.mobeigi.com.htpasswd
-    metrics_path: /node_exporter/metrics
+    metrics_path: /metrics
     static_configs:
       - targets: ['nodeexporter.mobeigi.com']
 
